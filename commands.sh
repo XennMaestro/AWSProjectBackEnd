@@ -9,3 +9,6 @@ aws cloudformation deploy --template-file gen\template-generated.yaml --stack-na
 
 # delete
 sam delete --stack-name back-end-sam
+
+
+aws cloudformation deploy --template-file gen\template-generated.yaml --stack-name back-end-sam --parameter-overrides Stage=staging --capabilities CAPABILITY_IAM 

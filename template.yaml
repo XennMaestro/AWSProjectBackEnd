@@ -6,7 +6,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: >-
   sam-app
-
 # Transform section specifies one or more macros that AWS CloudFormation uses to process your template
 # https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html
 Transform:
@@ -43,6 +42,9 @@ Resources:
           Properties:
             Path: /
             Method: GET
+            RestApiId:
+              Ref: BackEndApiV1 
+
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
@@ -71,6 +73,8 @@ Resources:
           Properties:
             Path: /{id}
             Method: GET
+            RestApiId:
+              Ref: BackEndApiV1
   # Each Lambda function is defined by properties:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
 
@@ -99,6 +103,9 @@ Resources:
           Properties:
             Path: /
             Method: POST
+            RestApiId:
+              Ref: BackEndApiV1
+
   # Simple syntax to create a DynamoDB table with a single attribute primary key, more in
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlesssimpletable
 
@@ -113,10 +120,15 @@ Resources:
         ReadCapacityUnits: 2
         WriteCapacityUnits: 2
 
+  BackEndApiV1:
+    Type: AWS::Serverless::Api
+    Properties:
+      StageName: api
+
 Outputs:
   WebEndpointProd:
     Description: "API Gateway endpoint URL for Prod stage"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+    Value: !Sub "https://${BackEndApiV1}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
   WebEndpointStage:
     Description: "API Gateway endpoint URL for Prod stage"
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Stage/"
+    Value: !Sub "https://${BackEndApiV1}.execute-api.${AWS::Region}.amazonaws.com/Stage/"
