@@ -114,6 +114,9 @@ Resources:
         WriteCapacityUnits: 2
 
 Outputs:
-  WebEndpoint:
+  WebEndpointProd:
     Description: "API Gateway endpoint URL for Prod stage"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"
+  WebEndpointStage:
+    Description: "API Gateway endpoint URL for Prod stage"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Stage/"

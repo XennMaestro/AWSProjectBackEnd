@@ -28,7 +28,7 @@ Resources:
           Properties:
             Path: /
             Method: GET
-      CodeUri: s3://awan-code-sam/39db253a12605b934ead51facab4f91f
+      CodeUri: s3://awan-code-sam/19824c2dcf78554471a353e6e79159cc
   getByIdFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -54,7 +54,7 @@ Resources:
           Properties:
             Path: /{id}
             Method: GET
-      CodeUri: s3://awan-code-sam/39db253a12605b934ead51facab4f91f
+      CodeUri: s3://awan-code-sam/19824c2dcf78554471a353e6e79159cc
   putItemFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -80,7 +80,7 @@ Resources:
           Properties:
             Path: /
             Method: POST
-      CodeUri: s3://awan-code-sam/39db253a12605b934ead51facab4f91f
+      CodeUri: s3://awan-code-sam/19824c2dcf78554471a353e6e79159cc
   SampleTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
@@ -91,7 +91,11 @@ Resources:
         ReadCapacityUnits: 2
         WriteCapacityUnits: 2
 Outputs:
-  WebEndpoint:
+  WebEndpointProd:
     Description: API Gateway endpoint URL for Prod stage
     Value:
       Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/
+  WebEndpointStage:
+    Description: API Gateway endpoint URL for Prod stage
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Stage/

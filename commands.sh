@@ -6,3 +6,6 @@ aws cloudformation package --s3-bucket awan-code-sam --template-file template.ya
 
 # deploy 
 aws cloudformation deploy --template-file gen\template-generated.yaml --stack-name back-end-sam --capabilities CAPABILITY_IAM
+
+# delete
+sam delete --stack-name back-end-sam
